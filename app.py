@@ -43,7 +43,7 @@ auth= firebase.auth()
 arabictext=[]
 hebrewtext=[]
 db.child
-@app.route('/' , methods= ('POST', "get"))
+@app.route('/FAQ' , methods= ('POST', "get"))
 def about():
     if request.method=="POST":
         name=request.form['name']
@@ -104,12 +104,18 @@ def signout():
     login_session['user']=None
     return (redirect(url_for('about')))
 
+@app.route('/home_AR')
+def homearabic():
+    return redirect(url_for('/home/AR'))
 
-@app.route('/home', methods=['POST','GET'])
+@app.route('/', methods=['POST','GET'])
+def homeHebrew():
+    return redirect(url_for('/home/HE'))
+
 @app.route('/home/<string:language>' ,methods=['POST', 'GET'])
-def home(language='he'):
+def home():
     language = language.lower()
-    return render_template('home.html', text= db.child('langueges').child(language).get().val())
+    return render_template('home.html', text= db.child('langueges').child(language).get().val(), language=language)
 
 if __name__ == '__main__':
     app.run(debug=True)
