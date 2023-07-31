@@ -32,8 +32,8 @@ app.config['SECRET_KEY'] = 'super-secret-key'
 mail=Mail(app)
 app.config['MAIL_SERVER']= 'smtp.gmail.com'
 app.config['MAIL_PORT']= 465
-app.config['MAIL_USERNAME']= 'poad7498@gmail.com'
-app.config['MAIL_PASSWORD']= 'doaayoav'
+app.config['MAIL_USERNAME']= 'shekulutov@outlook.com'
+app.config['MAIL_PASSWORD']= 'Adampolina'
 app.config['MAIL_USE_SSL']= True
 mail=Mail(app)
 
@@ -42,7 +42,7 @@ auth= firebase.auth()
 
 arabictext=[]
 hebrewtext=[]
-
+db.child
 @app.route('/' , methods= ('POST', "get"))
 def about():
     if request.method=="POST":
@@ -52,42 +52,51 @@ def about():
         question=request.form['question']
         question={'name':name, 'email':email, 'location':location, 'question':question}
         db.child('questions').push(question)
-    return render_template('about.html')
-@app.route('/admin')
+    try:
+        FAQ= db.child ('popular').get().val()
+        FAQ=list(FAQ.values())
+    except:
+        FAQ=[]
+    return render_template('about.html', FAQ=FAQ)
+@app.route('/admin' , methods=['POST', 'GET'])
 def adminlogin():
     if request.method=='POST':
-        username= request.form[ 'username']
-        password = request.form ['password']
-        if db.child('auth').get().val()[username]==password:
+        username= request.form['username']
+        password = request.form['password']
+        try:
             login_session['user']=auth.sign_in_with_email_and_password(username, password)
-            return redirect(url_for('admin'))
+            return redirect(url_for('answer'))
+        except Exception as e:
+            return(f'{e}')
+            return render_template('adminlogin.html')
     else:
         return render_template('adminlogin.html')
 @app.route ('/Answers', methods=['POST', 'GET'])
-def awnser():
+def answer():
     if request.method=='POST':
-        msg= Message('Awnser for question about out charity "shekulutov"', sender="poad7498@gmail.com", recipients= login_session['recipientemail'] )
-        msg.body= request.form[awnser]
+        msg= Message('Answer for question about out charity "shekulutov"', sender="poad7498@gmail.com", recipients= login_session['recipientemail'] )
+        msg.body= request.form['answer']
         mail.send(msg)
         if request.form [popular]==True:
-            question_and_awnser=db.child('questions').child(UID).get().val()
-            question_and_awnser['awnser']= request.form['awnser']
-            db.child('popular').push(question_and_awnser )
+            question_and_answer=db.child('questions').child(UID).get().val()
+            question_and_answer['answer']= request.form['answer']
+            db.child('popular').push(question_and_answer )
         db.child('questions').child(login_session['UID']).remove()
-        return render_template('admin.html')
     else:
         try:
-            print (login_session['localId'])
+            print (login_session['user'])
         except:
-            return redirect(url_for('awnser'))
-    try:
-        UID = random.choice(list(db.child('questions').get().val()))
-        loggin_session['UID']= UID    
-        value=db.child('questions').get().val()[UID]
-        login_session['recipientemail']= value['email']
-        return render_template('admin.html', question=value)
-    except: 
-        return "all questions awnsered"
+            return redirect(url_for('adminlogin'))
+
+    UID = random.choice(list(db.child('questions').get().val()))
+    login_session['UID']= UID    
+    value=db.child('questions').get().val()[UID]
+    print (1000000000000000000)
+    print (value)
+    login_session['recipientemail']= value['email']
+    return render_template('admin.html', question=value)
+    # except: 
+    #     return "all questions answered"
 
 @app.route("/signout")
 def signout():
