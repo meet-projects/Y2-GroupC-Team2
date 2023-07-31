@@ -99,6 +99,7 @@ def signout():
 @app.route('/home', methods=['POST','GET'])
 @app.route('/home/<string:language>' ,methods=['POST', 'GET'])
 def home(language='he'):
+    language = language.lower()
     return render_template('home.html', text= db.child('langueges').child(language).get().val())
 
 if __name__ == '__main__':
