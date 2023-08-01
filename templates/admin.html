@@ -6,6 +6,18 @@
 	<title>admin</title>
 </head>
 <body>
+	<h1>	message from {{question['name']}} in {{question['location']}}</h1>
 
+	<p> {{question['question']}}</p>
+<div>	
+<form method="POST" action="/Answers">
+<input type="text" name="answer" placeholder="enter response ">
+<input type="checkbox" name="popular"> add question to popular questions
+<input type="submit" placeholder="Send">
+</form>
+</div>	
+<div>	
+<a href="signout">Signout</a>
+</div>
 </body>
 </html>

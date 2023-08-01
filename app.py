@@ -3,8 +3,16 @@ from flask import session as login_session
 import pyrebase
 from flask_mail import Mail, Message
 import random 
-from googletrans import Translator
-translator = Translator()
+import jinja2
+
+
+
+# templateEnv = jinja2.Environment(
+#   loader=templateLoader,
+#   comment_start_string='{/',
+#   comment_end_string='/}',
+# )
+
 config = {
 
   'apiKey': "AIzaSyDVj6QQxX6ZotMxluwEMC58eST9HShAIUE",
@@ -32,8 +40,8 @@ app.config['SECRET_KEY'] = 'super-secret-key'
 mail=Mail(app)
 app.config['MAIL_SERVER']= 'smtp.gmail.com'
 app.config['MAIL_PORT']= 465
-app.config['MAIL_USERNAME']= 'poad7498@gmail.com'
-app.config['MAIL_PASSWORD']= 'doaayoav'
+app.config['MAIL_USERNAME']= 'shekulutov@outlook.com'
+app.config['MAIL_PASSWORD']= 'Adampolina'
 app.config['MAIL_USE_SSL']= True
 mail=Mail(app)
 
@@ -42,8 +50,8 @@ auth= firebase.auth()
 
 arabictext=[]
 hebrewtext=[]
-englishtext=[]
-@app.route('/' , methods= ('POST', "get"))
+db.child
+@app.route('/FAQ' , methods= ('POST', "get"))
 def about():
     if request.method=="POST":
         name=request.form['name']
@@ -52,39 +60,67 @@ def about():
         question=request.form['question']
         question={'name':name, 'email':email, 'location':location, 'question':question}
         db.child('questions').push(question)
-    return render_template('about.html')
-@app.route('/admin')
+    try:
+        FAQ= db.child ('popular').get().val()
+        FAQ=list(FAQ.values())
+    except:
+        FAQ=[]
+    return render_template('about.html', FAQ=FAQ)
+@app.route('/admin' , methods=['POST', 'GET'])
 def adminlogin():
     if request.method=='POST':
-        username= request.form[ 'username']
-        password = request.form ['password']
-        if db.child('auth').get().val()[username]==password:
+        username= request.form['username']
+        password = request.form['password']
+        try:
             login_session['user']=auth.sign_in_with_email_and_password(username, password)
-            return redirect(url_for('admin'))
+            return redirect(url_for('answer'))
+        except Exception as e:
+            return(f'{e}')
+            return render_template('adminlogin.html')
     else:
         return render_template('adminlogin.html')
 @app.route ('/Answers', methods=['POST', 'GET'])
-def awnser():
+def answer():
     if request.method=='POST':
-        msg= Message('Awnser for question about out charity "shekulutov"', sender="poad7498@gmail.com", recipients= login_session['recipientemail'] )
-        msg.body= request.form[awnser]
-        mail.send(msg)
-        return render_template('admin.html')
+        # msg= Message('Answer for question about out charity "shekulutov"', sender="poad7498@gmail.com", recipients= login_session['recipientemail'] )
+        # msg.body= request.form['answer']
+        # mail.send(msg)
+        if request.form [popular]==True:
+            question_and_answer=db.child('questions').child(UID).get().val()
+            question_and_answer['answer']= request.form['answer']
+            db.child('popular').push(question_and_answer )
+        db.child('questions').child(login_session['UID']).remove()
     else:
         try:
-            print (login_session['localId'])
+            print (login_session['user'])
         except:
-            return redirect(url_for('awnser'))
+            return redirect(url_for('adminlogin'))
+
     UID = random.choice(list(db.child('questions').get().val()))
+    login_session['UID']= UID    
     value=db.child('questions').get().val()[UID]
     login_session['recipientemail']= value['email']
-    db.child('questions').child(UID).remove()
     return render_template('admin.html', question=value)
-content = "This is a paragraph about a product !"
-@app.route('/test')
-def test():
-    translated = translator.translate(content,'ar')
-    return render_template('test.html',tr = translated.text)
+    # except: 
+    #     return "all questions answered"
 
+@app.route("/signout")
+def signout():
+    auth.current_user=None
+    login_session['user']=None
+    return (redirect(url_for('about')))
+
+@app.route('/home_ar')
+def home_arabic():
+    return redirect(url_for("home", language="ar"))
+
+@app.route('/', methods=['POST','GET'])
+def home_hebrew():
+    return redirect(url_for("home", language="he"))
+
+@app.route('/home/<string:language>' ,methods=['POST', 'GET'])
+def home(language):
+    language = language.lower()
+    return render_template('home.html', text= db.child('langueges').child(language).get().val(), language=language)
 if __name__ == '__main__':
     app.run(debug=True)
