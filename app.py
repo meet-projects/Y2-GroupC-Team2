@@ -6,31 +6,16 @@ import random
 import jinja2
 
 
-
-# templateEnv = jinja2.Environment(
-#   loader=templateLoader,
-#   comment_start_string='{/',
-#   comment_end_string='/}',
-# )
-
 config = {
-
   'apiKey': "AIzaSyDVj6QQxX6ZotMxluwEMC58eST9HShAIUE",
-
   'authDomain': "final2-e2f3e.firebaseapp.com",
-
   'databaseURL': "https://final2-e2f3e-default-rtdb.europe-west1.firebasedatabase.app",
-
   'projectId': "final2-e2f3e",
-
   'storageBucket': "final2-e2f3e.appspot.com",
-
   'messagingSenderId': "894344417219",
-
   'appId': "1:894344417219:web:49d852ac015d452f717776",
-
-'databaseURL':"https://final2-e2f3e-default-rtdb.europe-west1.firebasedatabase.app/"
-};
+  'databaseURL':"https://final2-e2f3e-default-rtdb.europe-west1.firebasedatabase.app/"
+}
 
 firebase=pyrebase.initialize_app(config)
 db=firebase.database()
@@ -38,11 +23,14 @@ app = Flask(__name__, template_folder='templates', static_folder='static')
 app.config['SECRET_KEY'] = 'super-secret-key'
 
 mail=Mail(app)
-app.config['MAIL_SERVER']= 'smtp.gmail.com'
-app.config['MAIL_PORT']= 465
-app.config['MAIL_USERNAME']= 'shekulutov@outlook.com'
-app.config['MAIL_PASSWORD']= 'Adampolina'
-app.config['MAIL_USE_SSL']= True
+
+app.config['MAIL_SERVER'] = 'smtp.office365.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USERNAME'] = 'shekulutov@outlook.com'
+app.config['MAIL_PASSWORD'] = 'Adampolina'
+app.config['MAIL_USE_SSL'] = False
+app.config['MAIL_USE_TLS'] = True
+
 mail=Mail(app)
 
 auth= firebase.auth()
@@ -50,7 +38,7 @@ auth= firebase.auth()
 
 arabictext=[]
 hebrewtext=[]
-db.child
+
 @app.route('/FAQ' , methods= ('POST', "get"))
 def about():
     if request.method=="POST":
@@ -82,10 +70,11 @@ def adminlogin():
 @app.route ('/Answers', methods=['POST', 'GET'])
 def answer():
     if request.method=='POST':
-        # msg= Message('Answer for question about out charity "shekulutov"', sender="poad7498@gmail.com", recipients= login_session['recipientemail'] )
-        # msg.body= request.form['answer']
-        # mail.send(msg)
-        if request.form [popular]==True:
+        msg = Message('Answer for question about out charity "shekulutov"', sender="shekulutov@outlook.com", recipients= ['jihadmagic@gmail.com'])
+        msg.body = request.form['answer']
+        mail.send(msg)
+        print('Supposedly, sent')
+        if request.form ["popular"]:
             question_and_answer=db.child('questions').child(UID).get().val()
             question_and_answer['answer']= request.form['answer']
             db.child('popular').push(question_and_answer )
@@ -122,6 +111,5 @@ def home_hebrew():
 def home(language):
     language = language.lower()
     return render_template('home.html', text= db.child('langueges').child(language).get().val(), language=language)
-
 if __name__ == '__main__':
     app.run(debug=True)
