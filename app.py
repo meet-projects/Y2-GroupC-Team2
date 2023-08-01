@@ -36,7 +36,9 @@ mail=Mail(app)
 auth= firebase.auth()
 
 
-db.child('langueges').child('he').set(["קבוצת שכולו טוב מובילה ומפתחת מסגרות שיקום אפקטיביות ופורצות דרך. הקבוצה פועלת לשינוי חייהם של א.נשים עם מוגבלויות בארץ ובעולם.","השירותים שלנו","קריירה בקבוצה","שירותים לעסקים","מקבלי שירות בקבוצה"," יחידות הכשרה","תעסוקתיות","השתלבות בשוק"," העבודה החופשי","מקבלי שירות שהשתלבו"," בשוק העבודה החופשי","אירועים חברתיים"," שהתקיימו בקבוצה","ארגונים שעובדים איתנו ֿלהעסקת אנשים עם מוגבלויות"," עובדים בקבוצה","* קבוצת שכולו טוב אינה מקבלת תרומות ואינה מפעילה מתנדבים","אודות הקבוצה","שירות לעסקים","שיקום תעסוקתי","שיקום חברתי","خدمات تشغيلية اجتماعية ترفيهية","מידע נוסף","קריירה בקבוצה","מחפשים עשייה משמעותית ומתארגנת?","הצטרפו אלינו","לכל המשרות","מנהל סניף לדנדושה ראשון לציון","אזור מרכז","רכז.ת תעסוקה לסיפור חוזר בעפולה"," מלווה תעסוקתי.ת למפעל במושב חזור","אודות","אודות הקבוצה","פעילות בינלאומית","קריירה בקבוצה","כתבו עלינו","מיזמי הקבוצה","התכנים שלנו","בלוג","VOD שכולו טוב","שירותים לעסקים","שאלות ותשובות לגבי הקבוצה","העסקת אנשים עם מוגבלויות","שירותים ומוצרים לעסקים","צרו קשר","عربي","קריירה","שכולה טוב","העסקת אנשים","עם מוגבלויות","שיקום תעסוקתי"," חברתי לא.נשים "," עם מוגבלויות","שכולוטוב","חיפשתי עבודה כמעט שנהת בליווי קפה טוב התקבלתי לעבודה בחברת משלוחים","מקבל שירות מקפה טוב","בקבוצה שכולוטוב","לא הייתי מצליח לקום מהמיטה, היום אני לא מפספס זה הישג גדול עבורי!","מקבל שירות מכלב טוב"," בקבוצה שכולו טוב","'אחרי חודש וחצי של ליווי תעסוקתי, התקבלתי להות מפיק בכאן 11!'","מקבל שירות מGOODJOB "," בקבוצת שכולוטוב"," חיפוש"])
+db.child('langueges').child('he').set([ 'حولنا','عن المجموعة' , 'النشاط الدولي' , ' مهنة في المجموعة' ,'كتِب عنا' ,'خدماتنا','المشاريع الجماعية','محتوياتنا', 'مدونة', 'VOD كل هذا جيد ' ,'خدمات للشركات', 'توظيف الاشخاص ذوي الاعاقة','خدمات ومنتجات للشركات' ,'أسئلة وأجوبة', 'עברית ',' تواصلوا معنا ', ' بحث','مجموعة',  'شيكلو توف' ,'تقود مجموعة Shekulo Tov "شيكلو توف" وتطور أطر إعادة تأهيل فعالة ورائدة. تعمل المجموعة على تغيير حياة الأشخاص ذوي الإعاقة في إسرائيل وحول العالم.','خدامتنا' , 'مهنة في المجموعة' ,' خدمات للشركات' , ' خدماتنا ','مهنة في المجموعة  ','خدمات للشركات  ', 'متلقي الخدمات في المجموعة  ', 'وحدات تدريب ', 'مهني  ', '  الانخراط في سوق  ', '  العمل الحر ' , ' متلقو الخدمة الذين  ', ' انخرطوا في سوق العمل  ', ' المناسبات الاجتماعية   ' , ' المنظمات التي تعمل معنا لتوظيف الأشخاص  التي معها إعاقات ' , ' عامل في المجموعة  ', ' *مجموعة "شيكلو توف" لا تقبل التبرعات ولا توظف المتطوعين ' , ' عن المجموعة   ', ' "بعد شهر ونصف من مرافقتي المهنية أصبحت منتجاً بقناة كان!!" ', ' يتلقى الخدمة من GOODJOB  ', ' في مجموعة شيكلوتوف ' ,'"لم أكن لأتمكن من النهوض من السرير ','اليوم لا اضيع مناوبة ! انه انجاز كبير جدا بالنسبة لي "', 'يتلقى الخدمة من مقهى جيد ',   ' في مجموعة شيكلوتوف ' , '"لقد كنت ابحث عن وظيفة' ,'منذ ما يقرب من عام' ,'برفقة قهوة جيدة حصلت على وظيفة في شركة توصيل " ', 'يتلقى الخدمة من مقهى جيد  ' ,'  في مجموعة جيدة  ' , "إلى وحداتنا التدريبية" ، "خريطة كل شيء جيد" ، "ابحث عن وحدة التدريب الأقرب إلى منزلك" ، "لإعادة التأهيل المهني" ، "خدماتنا" ، "إعادة التأهيل" ، "المهنية" ، "الخدمات" ، "للشركات" ، "إعادة التأهيل" ، "اجتماعي" ، "انقر للمزيد" ، "مهنة في المجموعة" ، "تبحث عن عمل هادف ومركّز؟" ، "انضم إلينا" ، "لجميع الوظائف" ، "مدير فرع دندشة ريشون لتسيون" ، "المنطقة المركزية" ، "وظيفة 100٪" ، "منسق توظيف لقصة متكررة في العفولة" ، "منطقة العفولة " ، "منصب 50٪" ، "مساعد التوظيف لمصنع في موشاف مازور" ، "منطقة المركز "،" وظيفة  75٪ "،" ما يحدث في المجموعة "،" home_hebrew"]
+     
+)
 @app.route('/FAQ' , methods= ('POST', "get"))
 def about():
     if request.method=="POST":
@@ -49,9 +51,11 @@ def about():
     try:
         FAQ= db.child ('popular').get().val()
         FAQ=list(FAQ.values())
+        print (FAQ)
     except:
         FAQ=[]
-    return render_template('about.html', FAQ=FAQ)
+        print('nah')
+    return render_template('about2.html', FAQ=FAQ, text= db.child('langueges').child('he').get().val())
 @app.route('/admin' , methods=['POST', 'GET'])
 def adminlogin():
     if request.method=='POST':
@@ -68,12 +72,12 @@ def adminlogin():
 @app.route ('/Answers', methods=['POST', 'GET'])
 def answer():
     if request.method=='POST':
-        msg = Message('Answer for question about out charity "shekulutov"', sender="shekulutov@outlook.com", recipients= ['jihadmagic@gmail.com'])
+        msg = Message('Answer for question about out charity "shekulutov"', sender="shekulutov@outlook.com", recipients= [login_session['recipientemail']])
         msg.body = request.form['answer']
         mail.send(msg)
         try:
             x= request.form["popular"]
-            question_and_answer=db.child('questions').child(UID).get().val()
+            question_and_answer=db.child('questions').child(login_session['UID']).get().val()
             question_and_answer['answer']= request.form['answer']
             db.child('popular').push(question_and_answer )
         except:
@@ -89,7 +93,7 @@ def answer():
         login_session['UID']= UID    
         value=db.child('questions').get().val()[UID]
         login_session['recipientemail']= value['email']
-        return render_template('admin.html', question=value)
+        return render_template('admin.html', question=value )
     except: 
         return "all questions answered"
 
@@ -106,10 +110,12 @@ def home_arabic():
 @app.route('/', methods=['POST','GET'])
 def home_hebrew():
     return redirect(url_for("home", language="he"))
-
+@app.route('/about')
+def about2():
+    return render_template('about2.html')
 @app.route('/home/<string:language>' ,methods=['POST', 'GET'])
 def home(language):
     language = language.lower()
-    return render_template('home.html', text= db.child('langueges').child(language).get().val(), language=language)
+    return render_template('home2.html', text= db.child('langueges').child(language).get().val(), language=language)
 if __name__ == '__main__':
     app.run(debug=True)

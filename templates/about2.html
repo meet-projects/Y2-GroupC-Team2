@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="static/css/about.css">
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+
+<div class="card-wrapper  | content-cc">
+  <div class="faq-card">
+
+    <div class="faq-ilustrations">
+
+      <!-- mobile -->
+      <img class="mobile pattern" 
+           src="https://raw.githubusercontent.com/Romerof/FAQ-accordion-card/main/images/bg-pattern-mobile.svg">
+      </img>
+      <img class="mobile ilust" 
+           src="https://raw.githubusercontent.com/Romerof/FAQ-accordion-card/main/images/illustration-woman-online-mobile.svg">
+      </img>
+      <!-- mobile -->
+    </div>
+
+    <main class="faq-content">
+      <h1>FAQ</h1>
+
+      <div class="faq-articles">
+        {%for question in FAQ%}
+        <article class="faq-accordion">
+
+          <input type="checkbox" class="tgg-title" id="tgg-title-1">
+
+          <div class="faq-accordion-title">
+            <label for="tgg-title-1">
+              <h2>{{question['question']}}</h2>
+              <span class="arrow-icon">
+                <img src="https://raw.githubusercontent.com/Romerof/FAQ-accordion-card/main/images/icon-arrow-down.svg">
+              </span>
+            </label>
+          </div>
+
+          <div class="faq-accordion-content">
+            <p>{{question['answer']}}</p>
+          </div>
+
+        
+        </article> <!-- faq accordion -->
+        {%endfor%}
+      </div> <!-- faq articles -->
+
+    </main> <!-- faq -->
+
+  </div> <!-- faq card -->
+
+</div> <!-- card wrapper -->
+
+
+</body>
+</html>

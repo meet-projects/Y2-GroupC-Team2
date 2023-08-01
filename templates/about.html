@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>אודות</title>
-  <style>
+ <style>
     body {
       font-family: Arial, sans-serif;
       background-color: #f5f5f5;
@@ -38,8 +38,8 @@
     {%for question in FAQ%}
   <div class="dropdown">
     <div class="title" onclick="toggleDropdown()">{{question[question]}}</div>
-    <div class="content" id="dropdownContent">
-      {{question[answer]}}
+    <div class="content" id="dropdownContent"> {{question['answer']}}
+      
     </div>
   </div>
 
@@ -52,9 +52,10 @@
         content.style.display = 'none';
       }
     }
-  </script>
+  </script> 
+ 
   {%endfor%}
-    <form method="POST" action="/">
+    <form method="POST" action="/FAQ">
 <div>
     <input type="text" name="name" placeholder="Name (optinal)">
     <input type="text" name="location" placeholder="City (optinal)">
