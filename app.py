@@ -3,7 +3,15 @@ from flask import session as login_session
 import pyrebase
 from flask_mail import Mail, Message
 import random 
+import jinja2
 
+
+
+# templateEnv = jinja2.Environment(
+#   loader=templateLoader,
+#   comment_start_string='{/',
+#   comment_end_string='/}',
+# )
 
 config = {
 
@@ -74,9 +82,9 @@ def adminlogin():
 @app.route ('/Answers', methods=['POST', 'GET'])
 def answer():
     if request.method=='POST':
-        msg= Message('Answer for question about out charity "shekulutov"', sender="poad7498@gmail.com", recipients= login_session['recipientemail'] )
-        msg.body= request.form['answer']
-        mail.send(msg)
+        # msg= Message('Answer for question about out charity "shekulutov"', sender="poad7498@gmail.com", recipients= login_session['recipientemail'] )
+        # msg.body= request.form['answer']
+        # mail.send(msg)
         if request.form [popular]==True:
             question_and_answer=db.child('questions').child(UID).get().val()
             question_and_answer['answer']= request.form['answer']
@@ -91,8 +99,6 @@ def answer():
     UID = random.choice(list(db.child('questions').get().val()))
     login_session['UID']= UID    
     value=db.child('questions').get().val()[UID]
-    print (1000000000000000000)
-    print (value)
     login_session['recipientemail']= value['email']
     return render_template('admin.html', question=value)
     # except: 
@@ -104,16 +110,16 @@ def signout():
     login_session['user']=None
     return (redirect(url_for('about')))
 
-@app.route('/home_AR')
-def homearabic():
-    return redirect(url_for('/home/AR'))
+@app.route('/home_ar')
+def home_arabic():
+    return redirect(url_for("home", language="ar"))
 
 @app.route('/', methods=['POST','GET'])
-def homeHebrew():
-    return redirect(url_for('/home/HE'))
+def home_hebrew():
+    return redirect(url_for("home", language="he"))
 
 @app.route('/home/<string:language>' ,methods=['POST', 'GET'])
-def home():
+def home(language):
     language = language.lower()
     return render_template('home.html', text= db.child('langueges').child(language).get().val(), language=language)
 
