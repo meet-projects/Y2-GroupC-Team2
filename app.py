@@ -3,8 +3,8 @@ from flask import session as login_session
 import pyrebase
 from flask_mail import Mail, Message
 import random 
-
-
+from googletrans import Translator
+translator = Translator()
 config = {
 
   'apiKey': "AIzaSyDVj6QQxX6ZotMxluwEMC58eST9HShAIUE",
@@ -80,7 +80,11 @@ def awnser():
     login_session['recipientemail']= value['email']
     db.child('questions').child(UID).remove()
     return render_template('admin.html', question=value)
-
+content = "This is a paragraph about a product !"
+@app.route('/test')
+def test():
+    translated = translator.translate(content,'ar')
+    return render_template('test.html',tr = translated.text)
 
 if __name__ == '__main__':
     app.run(debug=True)
