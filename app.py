@@ -111,6 +111,5 @@ def home_hebrew():
 def home(language):
     language = language.lower()
     return render_template('home.html', text= db.child('langueges').child(language).get().val(), language=language)
-
 if __name__ == '__main__':
     app.run(debug=True)
