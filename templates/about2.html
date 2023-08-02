@@ -8,55 +8,65 @@
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-
-<div class="card-wrapper  | content-cc">
+    <header>
+        <img src="static/navbar.PNG" alt="Header Photo" style="width: 100%; height: auto;">
+    </header>
+<div class="card-wrapper | content-cc">
   <div class="faq-card">
 
     <div class="faq-ilustrations">
-
       <!-- mobile -->
-      <img class="mobile pattern" 
-           src="https://raw.githubusercontent.com/Romerof/FAQ-accordion-card/main/images/bg-pattern-mobile.svg">
+      <img class="mobile pattern" src="https://raw.githubusercontent.com/Romerof/FAQ-accordion-card/main/images/bg-pattern-mobile.svg">
       </img>
-      <img class="mobile ilust" 
-           src="https://raw.githubusercontent.com/Romerof/FAQ-accordion-card/main/images/illustration-woman-online-mobile.svg">
+      <img class="mobile ilust" src="https://raw.githubusercontent.com/Romerof/FAQ-accordion-card/main/images/illustration-woman-online-mobile.svg">
       </img>
       <!-- mobile -->
     </div>
 
     <main class="faq-content">
-      <h1>FAQ</h1>
+      <h1>{{text[0]}}</h1>
 
       <div class="faq-articles">
-        {%for question in FAQ%}
+        {% for question in FAQ %}
         <article class="faq-accordion">
-
-          <input type="checkbox" class="tgg-title" id="tgg-title-1">
-
+          <input type="checkbox" class="tgg-title" id="tgg-title-{{loop.index}}">
           <div class="faq-accordion-title">
-            <label for="tgg-title-1">
+            <label for="tgg-title-{{loop.index}}">
               <h2>{{question['question']}}</h2>
               <span class="arrow-icon">
                 <img src="https://raw.githubusercontent.com/Romerof/FAQ-accordion-card/main/images/icon-arrow-down.svg">
               </span>
             </label>
           </div>
-
           <div class="faq-accordion-content">
             <p>{{question['answer']}}</p>
           </div>
+        </article>
+        {% endfor %}
+      </div>
 
-        
-        </article> <!-- faq accordion -->
-        {%endfor%}
-      </div> <!-- faq articles -->
+      <!-- Form for submitting questions -->
+      <form method="POST" action="/FAQ">
+<div>
+  <input type="text" name="name" placeholder="Name (optional)">
+</div>
+<div>
+  <input type="text" name="location" placeholder="City (optional)">
+</div>
+<div>
+  <input type="text" name="email" placeholder="Email">
+</div>
+<div>
+  <input type="text" name="question" placeholder="Question">
+</div>
+<input type="submit">
+      </form>
+      <!-- End of form -->
 
-    </main> <!-- faq -->
+    </main>
 
-  </div> <!-- faq card -->
-
-</div> <!-- card wrapper -->
-
+  </div>
+</div>
 
 </body>
 </html>
