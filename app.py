@@ -26,7 +26,7 @@ mail=Mail(app)
 
 app.config['MAIL_SERVER'] = 'smtp.office365.com'
 app.config['MAIL_PORT'] = 587
-app.config['MAIL_USERNAME'] = 'shekulutov@outlook.com'
+app.config['MAIL_USERNAME'] = 'shekulotov@outlook.com'
 app.config['MAIL_PASSWORD'] = 'Adampolina'
 app.config['MAIL_USE_SSL'] = False
 app.config['MAIL_USE_TLS'] = True
@@ -70,7 +70,7 @@ def adminlogin():
 @app.route ('/Answers', methods=['POST', 'GET'])
 def answer():
     if request.method=='POST':
-        msg = Message('Answer for question about out charity "shekulutov"', sender="shekulutov@outlook.com", recipients= [login_session['recipientemail']])
+        msg = Message('Answer for question about out charity "shekulutov"', sender="shekulotov@outlook.com", recipients= [login_session['recipientemail']])
         msg.body = request.form['answer']
         mail.send(msg)
         try:
@@ -99,7 +99,7 @@ def answer():
 def signout():
     auth.current_user=None
     login_session['user']=None
-    return (redirect(url_for('about')))
+    return (redirect(url_for('home_hebrew')))
 
 @app.route('/home_ar')
 def home_arabic():
